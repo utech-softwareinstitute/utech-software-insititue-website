@@ -1,35 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Contact Us - U Tech Software Institute</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>Contact U Tech</h1>
+    <h1>Contact Us</h1>
   </header>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="courses.html">Courses</a>
-    <a href="placements.html">Placement</a>
-    <a href="contact.html">Contact</a>
-  </nav>
-  <section>
-    <form action="https://formspree.io/f/xvgrrdoz" method="POST">
-      <label for="name">Your Name:</label><br>
-      <input type="text" name="name" required><br><br>
-      <label for="email">Your Email:</label><br>
-      <input type="email" name="email" required><br><br>
-      <label for="message">Message:</label><br>
-      <textarea name="message" rows="5" required></textarea><br><br>
+
+  <main>
+    <form action="https://formspree.io/f/xvgrrdoz" method="POST" onsubmit="redirectToThankYou(event)">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="Name" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="Phone" required />
+
+      <label for="email">Email Address:</label>
+      <input type="email" id="email" name="_replyto" required />
+
+      <label for="course">Course Required:</label>
+      <input type="text" id="course" name="Course" required />
+
+      <label for="location">Your Location:</label>
+      <input type="text" id="location" name="Location" required />
+
+      <label for="message">Your Message:</label>
+      <textarea id="message" name="Message" rows="5" required></textarea>
+
       <button type="submit">Send Message</button>
     </form>
-  </section>
+  </main>
+
   <footer>
-    <p>&copy; 2025 U Tech Software Institute of Technologies. All rights reserved.</p>
+    <p>&copy; 2025 U Tech Software Institute of Technologies</p>
   </footer>
+
+  <script>
+    function redirectToThankYou(event) {
+      event.preventDefault();
+      const form = event.target;
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          window.location.href = "thank-you.html";
+        } else {
+          alert("There was a problem submitting the form.");
+        }
+      });
+    }
+  </script>
 </body>
 </html>
