@@ -46,6 +46,11 @@
       border: 1px solid #ccc;
       border-radius: 4px;
     }
+    .phone-desc {
+      font-size: 0.85rem;
+      color: #555;
+      margin-top: 2px;
+    }
     input:invalid, textarea:invalid {
       border-color: red;
     }
@@ -53,4 +58,77 @@
       border-color: green;
     }
     button {
-      margin-
+      margin-top: 20px;
+      padding: 12px;
+      font-size: 16px;
+      background-color: #1a237e;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0d1b60;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1a237e;
+      color: white;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Contact Us</h1>
+  </header>
+
+  <main>
+    <form action="https://formspree.io/f/xvgrrdoz" method="POST" onsubmit="redirectToThankYou(event)">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="Name" required />
+
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="Phone" required pattern="\+91\s[0-9]{10}" placeholder="+91 XXXXXXXXXX" title="Phone number should be in format +91 XXXXXXXXXX" />
+      <div class="phone-desc">Please enter your phone number in this format: <strong>+91 XXXXXXXXXX</strong></div>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="_replyto" required />
+
+      <label for="course">Course Required</label>
+      <input type="text" id="course" name="Course" required />
+
+      <label for="location">Your Location</label>
+      <input type="text" id="location" name="Location" required />
+
+      <label for="message">Your Message</label>
+      <textarea id="message" name="Message" rows="5" required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 U Tech Software Institute of Technologies</p>
+  </footer>
+
+  <script>
+    function redirectToThankYou(event) {
+      event.preventDefault();
+      const form = event.target;
+      fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          window.location.href = "thank-you.html";
+        } else {
+          alert("There was a problem submitting the form.");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
